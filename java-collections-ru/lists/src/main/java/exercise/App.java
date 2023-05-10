@@ -7,12 +7,14 @@ public class App {
     public static boolean scrabble(String symbols, String word) {
         symbols = symbols.toLowerCase();
         word = word.toLowerCase();
-        ArrayList<Character> letter = new ArrayList<>();
+        ArrayList<Character> symbolArr = new ArrayList<>();
+        for(char c : symbols.toCharArray()) {
+            symbolArr.add((c));
+        }
         for (char ch : word.toCharArray()) {
-            letter.add(ch);
-            int index = symbols.indexOf(ch);
-            if (letter.contains(ch)) {
-                letter.remove(ch);
+            int index = symbolArr.indexOf(ch);
+            if (symbolArr.contains(ch)) {
+                symbolArr.remove(index);
             } else {
                 return false;
             }
