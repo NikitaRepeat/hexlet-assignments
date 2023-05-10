@@ -14,8 +14,8 @@ class App {
         }
         int count = 1;
 
-        for (int i = 0; i < words.size - 1; i++) {
-            for (int j = i + 1; j < words.size; j++) {
+        for (int i = 0; i < words.size() - 1; i++) {
+            for (int j = i + 1; j < words.size(); j++) {
                 if (wordsInSentence[i].equals(wordsInSentence[j])) {
                     count += 1;
                     words.remove(j);
