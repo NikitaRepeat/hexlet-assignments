@@ -16,12 +16,12 @@ class App {
 
         for (int i = 0; i < words.size() - 1; i++) {
             for (int j = i + 1; j < words.size(); j++) {
-                if (wordsInSentence[i].equals(wordsInSentence[j])) {
+                if (words.get(i).equals(words.get(j))) {
                     count += 1;
                     words.remove(j);
                 }
             }
-            wordsCount.put(wordsInSentence[i], count);
+            wordsCount.put(words.get(i), count);
         }
         return wordsCount;
     }
