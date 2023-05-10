@@ -7,10 +7,10 @@ import java.util.Map;
 class App {
     public static Map<String, Integer> getWordCount(String sentence) {
         Map<String, Integer> wordsCount = new HashMap<>();
-        String[] wordsInSentence = sentence.split(" ").toLowerCase();
+        String[] wordsInSentence = sentence.split(" ");
         int count = 1;
         for (int i = 0; i < wordsInSentence.length - 1; i++) {
-            for (int j = i + 1; j < wordsInSentence; j++) {
+            for (int j = i + 1; j < wordsInSentence.length; j++) {
                 if (wordsInSentence[i] == wordsInSentence[j]) {
                     count += 1;
                 }
