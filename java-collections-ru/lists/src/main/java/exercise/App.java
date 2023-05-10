@@ -1,23 +1,22 @@
 package exercise;
 
+import java.util.ArrayList;
+
 // BEGIN
 public class App {
-    public static boolean scrabble(String tiles, String word) {
-        tiles = tiles.toLowerCase();
+    public static boolean scrabble(String symbols, String word) {
+        symbols = symbols.toLowerCase();
         word = word.toLowerCase();
-        // Преобразуем строку с плитками в массив символов
-        char[] tilesArr = tiles.toCharArray();
-        // Проходим по буквам слова и ищем каждую букву в массиве с плитками
+        ArrayList<Character> letters = new ArrayList<>();
         for (char ch : word.toCharArray()) {
-            int index = tiles.indexOf(ch);
-            if (index == -1) {
-                // Если буква не найдена, то слово нельзя составить
+            letters.add(ch);
+            int index = symbols.indexOf(ch);
+            if (letters.contains(ch)) {
+                letters.remove(ch);
+            } else {
                 return false;
             }
-            // Удаляем букву из массива плиток, чтобы она никогда не была использована снова
-            tilesArr[index] = ' ';
         }
-        // Если мы прошли цикл полностью, то слово можно составить
         return true;
     }
 }
