@@ -25,7 +25,7 @@ class App {
             sb.append("  ").append(word).append(": ").append(wordsCount.get(word)).append("\n");
         }
         sb.append("}");
-        return sb.toString()
+        return sb.toString();
     }
 }
 //END
