@@ -11,7 +11,7 @@ class App {
         Map<String, Integer> wordsCount = new HashMap<>();
         String[] words = sentence.split(" ");
         for (String word : words) {
-            if (!wordsCount.containsKey(word) && word != "") {
+            if (!wordsCount.containsKey(word)) {
                 wordsCount.put(word, 1);
             } else {
                 int count = wordsCount.get(word);
