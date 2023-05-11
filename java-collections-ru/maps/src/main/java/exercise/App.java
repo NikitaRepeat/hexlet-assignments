@@ -9,21 +9,14 @@ class App {
     public static Map<String, Integer> getWordCount(String sentence) {
         sentence = sentence.toLowerCase();
         Map<String, Integer> wordsCount = new HashMap<>();
-        ArrayList<String> words = new ArrayList<>();
-        for (String w : sentence.split(" ")) {
-            words.add(w);
-        }
-        int count = 0;
-
-        for (int i = 0; i < words.size() - 1; i++) {
-            count = 1;
-            for (int j = i + 1; j < words.size(); j++) {
-                if (words.get(i) == words.get(j)) {
-                    count += 1;
-                    words.remove(j);
-                }
+        String[] words = sentence.split(" ");
+        for (String word : words) {
+            if (wordsCount.containsKey(word)) {
+                int count = wordsCount.get(word);
+                wordsCount.put(word, count + 1);
+            } else {
+                wordsCount.put(word, 1);
             }
-            wordsCount.put(words.get(i), count);
         }
         return wordsCount;
     }
