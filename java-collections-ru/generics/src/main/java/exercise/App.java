@@ -7,7 +7,7 @@ import java.util.ArrayList;
 // BEGIN
 public class App {
     public static List<Map<String, String>> findWhere(List<Map<String, String>> books, Map<String, String> query) {
-        List<Map<String, String>> whichBook = new ArrayList<>();
+        List<Map<String, String>> whichBooks = new ArrayList<>();
         for (Map<String, String> book : books) {
             boolean isMatch = true;
             for (String key : query.keySet()) {
@@ -17,10 +17,10 @@ public class App {
                 }
             }
             if (isMatch) {
-                whichBook.add(book);
+                whichBooks.add(book);
             }
         }
-        return whichBook;
+        return whichBooks;
     }
 }
 //END
