@@ -2,7 +2,6 @@ package exercise;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ArrayList;
 
 // BEGIN
 class App {
@@ -11,7 +10,9 @@ class App {
         Map<String, Integer> wordsCount = new HashMap<>();
         String[] words = sentence.split(" ");
         for (String word : words) {
-            if (!wordsCount.containsKey(word)) {
+            if (word == "") {
+                wordsCount.put(word, 0);
+            } else if (!wordsCount.containsKey(word) && word != "") {
                 wordsCount.put(word, 1);
             } else {
                 int count = wordsCount.get(word);
