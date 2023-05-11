@@ -12,9 +12,10 @@ class App {
         for (String w : sentence.split(" ")) {
             words.add(w);
         }
+        int count = 0;
 
         for (int i = 0; i < words.size() - 1; i++) {
-            int count = 1;
+            count = 1;
             for (int j = i + 1; j < words.size(); j++) {
                 if (words.get(i) == words.get(j)) {
                     count += 1;
