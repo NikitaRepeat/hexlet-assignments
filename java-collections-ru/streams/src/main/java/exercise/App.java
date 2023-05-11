@@ -9,7 +9,7 @@ public class App {
     public static long getCountOfFreeEmails(List<String> inputEmails) {
         long emailList = inputEmails.stream()
                 .filter(Objects::nonNull)
-                .filter(email -> !email.isEmpty() && (email.contains("gmail.com") || email.contains("yandex.ru") || email.contains("hotmail.com")))
+                .filter(email -> !email.isEmpty() && (email.contains("@gmail.com") || email.contains("@yandex.ru") || email.contains("@hotmail.com")))
                 .count();
         return emailList;
     }
