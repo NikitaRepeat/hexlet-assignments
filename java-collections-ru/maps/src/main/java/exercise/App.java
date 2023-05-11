@@ -7,6 +7,7 @@ import java.util.ArrayList;
 // BEGIN
 class App {
     public static Map<String, Integer> getWordCount(String sentence) {
+        sentence = sentence.toLowerCase();
         Map<String, Integer> wordsCount = new HashMap<>();
         ArrayList<String> words = new ArrayList<>();
         for (String w : sentence.split(" ")) {
