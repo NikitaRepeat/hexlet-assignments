@@ -24,12 +24,16 @@ class App {
         }
     }
     public static String toString(Map<String, Integer> wordsCount) {
-        StringBuilder sb = new StringBuilder("{\n");
-        for (String word : wordsCount.keySet()) {
-            sb.append("  ").append(word).append(": ").append(wordsCount.get(word)).append("\n");
+        if (wordsCount.isEmpty()) {
+            return "{}";
+        } else {
+            StringBuilder sb = new StringBuilder("{\n");
+            for (String word : wordsCount.keySet()) {
+                sb.append("  ").append(word).append(": ").append(wordsCount.get(word)).append("\n");
+            }
+            sb.append("}");
+            return sb.toString();
         }
-        sb.append("}");
-        return sb.toString();
     }
 }
 //END
