@@ -9,17 +9,19 @@ class App {
         sentence = sentence.toLowerCase();
         Map<String, Integer> wordsCount = new HashMap<>();
         String[] words = sentence.split(" ");
-        for (String word : words) {
-            if (word == "") {
-                wordsCount.put(word, 0);
-            } else if (!wordsCount.containsKey(word) && word != "") {
-                wordsCount.put(word, 1);
-            } else {
-                int count = wordsCount.get(word);
-                wordsCount.put(word, count + 1);
+        if (sentence.isEmpty()) {
+            return wordsCount;
+        } else {
+            for (String word : words) {
+                if (!wordsCount.containsKey(word)) {
+                    wordsCount.put(word, 1);
+                } else {
+                    int count = wordsCount.get(word);
+                    wordsCount.put(word, count + 1);
+                }
             }
+            return wordsCount;
         }
-        return wordsCount;
     }
     public static String toString(Map<String, Integer> wordsCount) {
         StringBuilder sb = new StringBuilder("{\n");
