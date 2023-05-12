@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 public class Sorter {
     public static List<String> takeOldestMans(List<Map<String, String>> users) {
         return users.stream()
-                .filter(Objects::nonNull)
+                .filter(user -> user.get("gender").equals("male"))
+                .sorted(Comparator.comparing(user -> LocalDate.parse(user.get("birthday"))))
                 .map(user -> user.get("name"))
-                .sorted((user1, user2) -> user1.compareTo(user2))
                 .collect(Collectors.toList());
 
     }
