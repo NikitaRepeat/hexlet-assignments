@@ -8,7 +8,7 @@ public class App {
     public static String getForwardedVariables(String content) {
         return Arrays.stream(content.split("\n"))
                 .filter(line -> line.contains("environment"))
-                .flatMap(line -> Arrays.stream(line.split("\"")))
+                .flatMap(line -> Arrays.stream(line.split("")))
                 .filter(variables -> variables.startsWith("X_FORWARDED_"))
                 .map(variables -> variables.replace("X_FORWARDED_", ""))
                 .map(variables -> {
