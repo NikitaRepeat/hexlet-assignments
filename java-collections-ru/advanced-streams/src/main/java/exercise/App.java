@@ -27,10 +27,8 @@ public class App {
         // Конвертируем переменные в строку формата "имя1=значение1,имя2=значение2,имя3=значение3,..."
         for (String var : variables) {
             String[] parts = var.split("=");
-            if (parts.length == 2) {
-                String str = sb.append(parts[0]).append("=").append(parts[1].trim()).toString();
-                result += str;
-            }
+            String str = sb.append(parts[0]).append("=").append(parts[1].trim()).toString();
+            result += str;
         }
         // Удаляем последнюю запятую и возвращаем результат
         return result.substring(0, result.length() - 1);
