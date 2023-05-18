@@ -8,15 +8,14 @@ public class App {
     public static String getForwardedVariables(String content) {
         return Arrays.stream(content.split("\n"))
                 .filter(line -> line.contains("environment"))
-                .flatMap(line -> Arrays.stream(line.split("")))
-                .filter(variables -> variables.startsWith("X_FORWARDED_"))
-                .map(variables -> variables.replace("X_FORWARDED_", ""))
-                .map(variables -> {
-                    String[] variablesValue = variables.split("=");
-                    return variablesValue[0] + "=" + variablesValue[1];
+                .flatMap(line -> Arrays.stream(line.split("\"")))
+                .filter(variable -> variable.startsWith("X_FORWARDED_"))
+                .map(variable -> variable.replace("X_FORWARDED_", ""))
+                .map(variable -> {
+                    String[] variableValue = variable.split("=");
+                    return variableValue[0] + "=" + variableValue[1];
                 })
-                .collect(Collectors.joining(""));
-
+                .collect(Collectors.joining(","));
     }
 }
 //END
