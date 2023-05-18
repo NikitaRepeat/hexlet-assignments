@@ -27,6 +27,10 @@ public class App {
             if (parts.length == 2) {
                 String name = parts[0].replace("X_FORWARDED_", "");
                 String value = parts[1].trim();
+                result += name + "=" + value;
+            } else {
+                String name = parts[0].replace("X_FORWARDED_", "");
+                String value = parts[1].trim();
                 result += name + "=" + value + ",";
             }
         }
