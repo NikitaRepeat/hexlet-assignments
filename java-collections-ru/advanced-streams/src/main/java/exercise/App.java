@@ -15,9 +15,7 @@ public class App {
                 .map(variable -> variable.replace("X_FORWARDED_", ""))
                 .map(variable -> {
                     String[] variableValue = variable.split("=");
-                    String name = variableValue[0];
-                    String value = variableValue[1].trim();
-                    return name + "=" + value;
+                    return variableValue[0] + "=" + variableValue[1];
                 })
                 .collect(Collectors.joining(","));
     }
