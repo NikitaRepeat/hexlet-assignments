@@ -20,15 +20,17 @@ public class App {
 
         // Извлекаем переменные
         List<String> variables = envStrings.stream()
-                .filter(s -> s.startsWith("X_FORWARDED_"))
+                .filter(s -> s.contains("X_FORWARDED_"))
                 .map(s -> s.replace("X_FORWARDED_", ""))
                 .collect(Collectors.toList());
 
         // Конвертируем переменные в строку формата "имя1=значение1,имя2=значение2,имя3=значение3,..."
         for (String var : variables) {
             String[] parts = var.split("=");
-            String str = sb.append(parts[0]).append("=").append(parts[1].trim()).append(",").toString();
-            result += str;
+            if (parts.length == 2) {
+                String str = sb.append(parts[0]).append("=").append(parts[1].trim()).append(",").toString();
+                result += str;
+            }
         }
         // Удаляем последнюю запятую и возвращаем результат
         return result.substring(0, result.length() - 1);
