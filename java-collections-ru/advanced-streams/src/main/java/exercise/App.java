@@ -8,21 +8,14 @@ import java.util.stream.Stream;
 // BEGIN
 public class App {
     public static String getForwardedVariables(String content) {
-        String[] lines = content.split("\n");
-        return Arrays.stream(lines)
-                .flatMap(line -> {
-                    if (line.startsWith("environment=")) {
-                        String[] envVars = line.substring(12, line.length() - 1).split(",");
-                        return Arrays.stream(envVars)
-                                .filter(envVar -> envVar.startsWith("X_FORWARDED_"))
-                                .map(envVar -> envVar.substring(12))
-                                .map(envVar -> {
-                                    String[] parts = envVar.split("=");
-                                    return parts[0] + "=" + parts[1];
-                                });
-                    } else {
-                        return Stream.empty();
-                    }
+        return Arrays.stream(content.split("\n"))
+                .filter(line -> line.contains("environment"))
+                .flatMap(line -> Arrays.stream(line.split("\"")))
+                .filter(variable -> variable.startsWith("X_FORWARDED_"))
+                .map(variable -> variable.replace("X_FORWARDED_", ""))
+                .map(variable -> {
+                    String[] variableValue = variable.split("=");
+                    return variableValue[0] + "=" + variableValue[1];
                 })
                 .collect(Collectors.joining(","));
     }
