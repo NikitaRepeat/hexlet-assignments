@@ -31,7 +31,7 @@ public class App {
             result += str;
         }
         // Удаляем последнюю запятую и возвращаем результат
-        return result.substring(0, result.length() - 1);
+        return result.substring(0);
     }
 }
 //END
