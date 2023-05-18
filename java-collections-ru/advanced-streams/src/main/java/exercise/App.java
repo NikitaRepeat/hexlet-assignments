@@ -15,7 +15,7 @@ public class App {
                     String[] variablesValue = variables.split("=");
                     return variablesValue[0] + "=" + variablesValue[1];
                 })
-                .collect(Collectors.joining(","));
+                .collect(Collectors.joining(""));
 
     }
 }
