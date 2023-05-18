@@ -32,7 +32,7 @@ public class App {
             }
         }
         // Удаляем последнюю запятую и возвращаем результат
-        return result;
+        return result.substring(0);
     }
 }
 //END
