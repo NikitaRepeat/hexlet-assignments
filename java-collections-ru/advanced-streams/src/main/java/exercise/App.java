@@ -18,19 +18,15 @@ public class App {
         List<String> variables = envStrings.stream()
                 .flatMap(s -> Arrays.asList(s.split(",")).stream())
                 .filter(s -> s.startsWith("X_FORWARDED_"))
+                .map(s -> s.replace("X_FORWARDED_", ""))
                 .collect(Collectors.toList());
 
         StringBuilder sb = new StringBuilder();
 
-
         // Конвертируем переменные в строку формата "имя1=значение1,имя2=значение2,имя3=значение3,..."
         for (String var : variables) {
             String[] parts = var.split("=");
-            if (parts.length == 2) {
-                String name = parts[0].replace("X_FORWARDED_", "");
-                String value = parts[1].trim();
-                sb.append(name).append("=").append(value);
-            }
+            sb.append(parts[0]).append("=").append(parts[1]).append(",");
         }
         // Удаляем последнюю запятую и возвращаем результат
         return sb.toString();
