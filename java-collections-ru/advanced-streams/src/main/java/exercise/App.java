@@ -15,7 +15,7 @@ public class App {
         List<String> envStrings = Arrays.asList(content.split("\n"))
                 .stream()
                 .filter(s -> s.startsWith("environment="))
-                .flatMap(s -> Arrays.stream(s.split(",")))
+                .flatMap(s -> Arrays.stream(s.split("\"")))
                 .collect(Collectors.toList());
 
         // Извлекаем переменные
@@ -31,7 +31,7 @@ public class App {
             result += str;
         }
         // Удаляем последнюю запятую и возвращаем результат
-        return result.substring(0);
+        return result.substring(0, result.length() - 1);
     }
 }
 //END
