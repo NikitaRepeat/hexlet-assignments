@@ -9,26 +9,27 @@ import java.util.stream.Stream;
 public class App {
     public static String getForwardedVariables(String content) {
         String result = "";
+        StringBuilder sb = new StringBuilder();
 
         // Ищем строки с командой environment
         List<String> envStrings = Arrays.asList(content.split("\n"))
                 .stream()
                 .filter(s -> s.startsWith("environment="))
+                .flatMap(s -> Arrays.stream(s.split("\"")))
                 .collect(Collectors.toList());
 
         // Извлекаем переменные
         List<String> variables = envStrings.stream()
-                .flatMap(s -> Arrays.asList(s.split(",")).stream())
                 .filter(s -> s.startsWith("X_FORWARDED_"))
+                .map(s -> s.replace("X_FORWARDED_", ""))
                 .collect(Collectors.toList());
 
         // Конвертируем переменные в строку формата "имя1=значение1,имя2=значение2,имя3=значение3,..."
         for (String var : variables) {
             String[] parts = var.split("=");
             if (parts.length == 2) {
-                String name = parts[0].replace("X_FORWARDED_", "");
-                String value = parts[1].trim();
-                result += name + "=" + value + ",";
+                String str = sb.append(parts[0]).append("=").append(parts[1]).toString();
+                result += str;
             }
         }
         // Удаляем последнюю запятую и возвращаем результат
