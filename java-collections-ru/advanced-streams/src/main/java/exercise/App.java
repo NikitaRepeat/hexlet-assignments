@@ -33,7 +33,7 @@ public class App {
             }
         }
         // Удаляем последнюю запятую и возвращаем результат
-        return result.substring(0);
+        return result.substring(0, result.length() - 1);
     }
 }
 //END
