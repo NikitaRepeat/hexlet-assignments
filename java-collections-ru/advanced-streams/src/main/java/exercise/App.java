@@ -28,7 +28,7 @@ public class App {
         for (String var : variables) {
             String[] parts = var.split("=");
             if (parts.length == 2) {
-                String str = sb.append(parts[0]).append("=").append(parts[1]).toString();
+                String str = sb.append(parts[0]).append("=").append(parts[1].trim()).toString();
                 result += str;
             }
         }
