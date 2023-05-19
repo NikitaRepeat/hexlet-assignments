@@ -11,13 +11,13 @@ public class App {
         StringBuilder res = new StringBuilder();
         String[] lines = content.split("\n");
         for (String line : lines) {
-            if (line.contains("environment")) {
+            if (line.startsWith("environment=")) {
                 String[] envs = line.split("\"")[1].split(",");
                 for (String env : envs) {
-                    if (env.startsWith("X_FORWARDED_")) {
+                    if (env.contains("X_FORWARDED_")) {
                         env = env.replaceAll("X_FORWARDED_", "");
                         String name = env.split("=")[0];
-                        String value = env.split("=")[1];
+                        String value = env.split("=")[1].trim();
                         res.append(name);
                         res.append("=");
                         res.append(value);
