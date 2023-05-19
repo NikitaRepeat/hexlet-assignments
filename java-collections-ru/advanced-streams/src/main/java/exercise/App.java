@@ -14,7 +14,7 @@ public class App {
         // Ищем строки с командой environment
         List<String> envStrings = Arrays.asList(content.split("\n"))
                 .stream()
-                .filter(s -> s.contains("environment="))
+                .filter(s -> s.startsWith("environment="))
                 .flatMap(s -> Arrays.stream(s.split("\"")))
                 .collect(Collectors.toList());
 
