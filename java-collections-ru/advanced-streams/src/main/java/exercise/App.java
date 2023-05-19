@@ -17,7 +17,7 @@ public class App {
                     if (env.startsWith("X_FORWARDED_")) {
                         env = env.replaceAll("X_FORWARDED_", "");
                         String name = env.split("=")[0];
-                        String value = env.split("=")[1].trim();
+                        String value = env.split("=")[1];
                         res.append(name);
                         res.append("=");
                         res.append(value);
