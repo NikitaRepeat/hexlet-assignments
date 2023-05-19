@@ -14,13 +14,13 @@ public class App {
         // Ищем строки с командой environment
         List<String> envStrings = Arrays.asList(content.split("\n"))
                 .stream()
-                .filter(s -> s.startsWith("environment="))
-                .flatMap(s -> Arrays.stream(s.split("\"")))
+                .filter(s -> s.contains("environment="))
+                .flatMap(s -> Arrays.stream(s.split("\"")[1].split(",")))
                 .collect(Collectors.toList());
 
         // Извлекаем переменные
         List<String> variables = envStrings.stream()
-                .filter(s -> s.contains("X_FORWARDED_"))
+                .filter(s -> s.startsWith("X_FORWARDED_"))
                 .map(s -> s.replace("X_FORWARDED_", ""))
                 .collect(Collectors.toList());
 
