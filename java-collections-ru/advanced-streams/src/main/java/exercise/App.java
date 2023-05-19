@@ -8,32 +8,25 @@ import java.util.stream.Stream;
 // BEGIN
 public class App {
     public static String getForwardedVariables(String content) {
-        String result = "";
-        StringBuilder sb = new StringBuilder();
-
-        // Ищем строки с командой environment
-        List<String> envStrings = Arrays.asList(content.split("\n"))
-                .stream()
-                .filter(s -> s.contains("environment="))
-                .flatMap(s -> Arrays.stream(s.split("\"")[1].split(",")))
-                .collect(Collectors.toList());
-
-        // Извлекаем переменные
-        List<String> variables = envStrings.stream()
-                .filter(s -> s.startsWith("X_FORWARDED_"))
-                .map(s -> s.replace("X_FORWARDED_", ""))
-                .collect(Collectors.toList());
-
-        // Конвертируем переменные в строку формата "имя1=значение1,имя2=значение2,имя3=значение3,..."
-        for (String var : variables) {
-            String[] parts = var.split("=");
-            if (parts.length == 2) {
-                String str = sb.append(parts[0]).append("=").append(parts[1].trim()).append(",").toString();
-                result += str;
+        StringBuilder res = new StringBuilder();
+        String[] lines = content.split("\n");
+        for (String line : lines) {
+            if (line.contains("environment")) {
+                String[] envs = line.split("\"")[1].split(",");
+                for (String env : envs) {
+                    if (env.startsWith("X_FORWARDED_")) {
+                        env = env.replaceAll("X_FORWARDED_", "");
+                        String name = env.split("=")[0];
+                        String value = env.split("=")[1];
+                        res.append(name);
+                        res.append("=");
+                        res.append(value);
+                        res.append(",");
+                    }
+                }
             }
         }
-        // Удаляем последнюю запятую и возвращаем результат
-        return result.substring(0, result.length() - 1);
+        return res.toString().replaceAll(",$", "");
     }
 }
 //END
